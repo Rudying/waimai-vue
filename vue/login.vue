@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="d1">
-			<img src="../images/regist.png" width="600px">
+			<img src="../images/regist.png" width="600">
 		</div>
 		<div class="d2">
 			<form>
@@ -17,9 +17,9 @@
 							</div>
 							<div class="login_3"></div>
 							<div style="margin-top: 30px;"></div>
-							<div class="size" >用户名:&nbsp;<input class="shurukuang" type="text" placeholder="请输入您的用户名" v-model="username" /></div>
+							<div class="size" >用户名:&nbsp;<input ref="tt" maxlength="11"  class="shurukuang" type="text" placeholder="请输入您的用户名" v-model="username" @keyup.enter="login" /></div>
 							<div class="size" >密&nbsp;&nbsp;&nbsp;&nbsp;码:&nbsp;<input class="shurukuang" type="password" 
-								 placeholder="请输入您的密码" v-model="password" /></div>
+								 placeholder="请输入您的密码" v-model="password" @keyup.enter="login" /></div>
 							<div class="size"  >
 								<div class="left fl" >验证码:&nbsp;<input class="yanzhengma" type="text"  placeholder="验证码" /></div>
 								<div class="right fl"></div>
@@ -60,33 +60,37 @@
 				this.$router.push("/regist");
 			},
 			login(){
-				var reg =  /^[1-9a-zA-Z][0-9a-zA-Z]{4,10}$/;
+				var reg = /^[1-9a-zA-Z][0-9a-zA-Z]{4,10}$/;
+				var path = this;
 				if(reg.test(this.username)){
-					var path = this;
 					axios.post("/users/login",{
-						username:this.username,
-						password:this.password
+						username:path.username,
+						password:path.password
 					}).then(function(response){
 						if(response.data==""){
-							layer.msg('账号或密码不正确，登录失败');
+							layer.msg('登录失败，该账号已在其他地方登录');
+							path.username="";
+							path.password="";
+							path.$refs.tt.focus();
 						}else{
 							layer.msg('登录成功');
-							//设置成功跳转的页面
-							path.loginUser = response.data
-							path.$router.push({
-								path:"/",
-								query:{
-									loginUser:path.loginUser
-								}
-							});
+							path.$router.push("/");
 						}
+					}).catch(function(){
+						layer.msg('登录失败，账号或密码不正确');
 					})
+					
 				}else{
 					layer.msg('账号格式不正确');
+					path.username="";
+					path.password="";
+					path.$refs.tt.focus();
 				}
-				
 			}
-		}
+		},
+		mounted() {
+			this.$refs.tt.focus();
+		},
 	}
 </script>
 
