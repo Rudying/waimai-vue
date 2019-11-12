@@ -52,6 +52,12 @@ var router = new VueRouter({
 					components: {
 						"show": type,
 					}
+				},
+				{
+					path: "/food",
+					components: {
+						"show": food,
+					}
 				}
 			]
 		},
