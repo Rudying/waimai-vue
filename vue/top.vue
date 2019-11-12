@@ -20,7 +20,7 @@
 		</div>
 		
 		<div id="top-nav2">
-			<div class="top-nav2-left col-md-2 col-md-offset-1">
+			<div class="top-nav2-left col-md-2 col-md-offset-1"> 
 				<a title="蜗牛外卖" href="#" @click="shouye"><img src="images/head.png" /></a>
 			</div>
 			<div class="top-nav2-right col-md-9">
