@@ -110,6 +110,7 @@
 				}).then(function(response) {
 					console.log(response);
 				})
+				
 			},
 			ShowUpdate(item) {
 				this.tid = item.tid;
