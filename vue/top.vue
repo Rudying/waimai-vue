@@ -1,27 +1,26 @@
 <template>
 	<div id="top">
 		<div id="top-nav">
-			<div id="top-nav-info">
+			<div id="top-nav-info">					
 				<div class="col-md-5 col-md-offset-7">
 					<span>
-
-						<a href="#" @click="login" v-if="a" style="text-decoration:none">你好，请登录&nbsp&nbsp丨</a>
-						<span href="#" v-else="a">{{loginName}} 丨 <a href="#" @click="logout" style="text-decoration:none">安全退出</a> 丨</span>
-
-						<a href="#" @click="regist" style="text-decoration:none">免费注册</a>
+						
+						<a href="#"  @click="login" v-if="loginName==''" style="text-decoration:none" >您好，请登录&nbsp&nbsp 丨</a>
+						<span href="#" v-else="loginName">欢迎 {{loginName}} 登录 丨 <a href="#" @click="logout" style="text-decoration:none">安全退出</a> 丨</span>
+						<a href="#" @click="regist"  style="text-decoration:none">免费注册</a>
 					</span>
 					<span>&nbsp&nbsp|&nbsp&nbsp</span>
-					<a href="#" style="text-decoration:none">个人中心</a>
+					<a href="#" style="text-decoration:none" @click="myindex">个人中心</a>
 					<span>&nbsp&nbsp|&nbsp&nbsp</span>
-					<a target="_blank" href="#" style="text-decoration:none">商户服务</a>
+					<a target="_blank" href="#"  style="text-decoration:none">商户服务</a>
 					<span>&nbsp&nbsp|&nbsp&nbsp</span>
-					<a target="_blank" href="#" style="text-decoration:none">帮助中心</a>
+					<a target="_blank" href="#"  style="text-decoration:none">帮助中心</a>
 				</div>
 			</div>
 		</div>
-
+		
 		<div id="top-nav2">
-			<div class="top-nav2-left col-md-2 col-md-offset-1">
+			<div class="top-nav2-left col-md-2 col-md-offset-1"> 
 				<a title="蜗牛外卖" href="#" @click="shouye"><img src="images/head.png" /></a>
 			</div>
 			<div class="top-nav2-right col-md-9">
@@ -35,61 +34,63 @@
 <script>
 	import axios from 'axios';
 	export default {
-		data() {
-			return {
-				a: true,
-				loginName: ""
+		data(){
+			return{
+				loginName:"",
 			}
 		},
-		methods: {
-			shouye() {
-				this.$router.push("/");
+		methods:{
+			shouye(){
+				this.$router.push("/")
 			},
-			login() {
+			login(){
 				this.$router.push("/login")
 			},
-			regist() {
+			regist(){
 				this.$router.push("/regist")
 			},
-			logout() {
-				var a = this;
-				axios.get("/users/logout").then(function(response) {
-					a.a = true;
+			myindex(){
+				this.$router.push("/myindex")
+			},
+			logout(){
+				axios.post("/users/logout",{
+					loginName:this.loginName
+				}).then((response)=>{
 					layer.msg('已退出当前账号');
-					a.$router.push("/");
+					this.loginName = "";
+					this.$router.push("/");
 				})
 			}
 		},
-		created() {
-			if (this.$route.query.hasOwnProperty("loginUser")) {
-				this.a = false;
-				this.loginName = "欢迎 " + this.$route.query.loginUser.username + " 登录";
-			}
-			if (this.loginName.substring(3, 11) == "undefine") {
-				this.a = true;
-				this.$router.push("/")
-			}
-		}
+		beforeCreate(){
+			var path = this;
+			axios.get("/users/isLogin").then(function(response){
+				console.log(response.data)
+				if(!response.data.isLogin){
+					path.$router.push("/");
+				}else{
+					path.loginName =  response.data.loginName
+				}
+			})
+		},
 	};
+	
 </script>
 
 <style scoped="scoped">
 	#top {
 		height: 150px;
 	}
-
 	img {
 		width: 300px;
 		height: 110px;
 	}
-
-	#top-nav {
+	#top-nav{
 		height: 30px;
 		background-color: #F6F6F6;
 		line-height: 30px;
 	}
-
-	.top-nav2-right {
+	.top-nav2-right{
 		height: 50px;
 		width: 600px;
 		background-color: orange;

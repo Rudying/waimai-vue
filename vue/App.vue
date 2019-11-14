@@ -7,6 +7,7 @@
 		<router-view name="login"></router-view>
 		<router-view name="regist"></router-view>
 		<router-view name="admin"></router-view>
+		<router-view name="myindex"></router-view>
 	</div>
 </template>
 
