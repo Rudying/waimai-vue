@@ -16,7 +16,7 @@
 			    <li><router-link to="/element">订单项管理</router-link></li>
 			    <li><router-link to="/order">订单管理</router-link></li>
 			    <li><router-link to="/food">菜品管理</router-link></li> 
-			    <li><router-link to="/shop">商家管理</router-link></li>
+			    <li><router-link to="/store">商家管理</router-link></li>
 			    <li><router-link to="/type">菜品类型管理</router-link></li>			 
 		</ul>	
 			</div>

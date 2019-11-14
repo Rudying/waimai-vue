@@ -57,7 +57,7 @@
 					<td>{{item.fname}}</td>
 					<td>{{item.finfo}}</td>
 					<td v-for="a in (item.fphoto.split(','))">
-						<img :src="host+a" style="width: 100px;height: 100px;"/>
+						<img :src="host+a" style="width: 100px;height: 100px;" />
 					</td>
 					<td>{{item.fprice}}</td>
 					<td><button class="btn btn-success" @click="ShowUpdate(item)">修改</button></td>
@@ -65,7 +65,14 @@
 				</tr>
 			</tbody>
 		</table>
-		<button class="btn btn-info" @click="showSave">添加类型</button>
+		<div style="margin-top: 30px;">
+			<button class="btn btn-info">首页</button>
+			<button class="btn btn-info" @click="before">上一页</button>
+			<span>/</span>
+			<button class="btn btn-info" @click="next">下一页</button>
+			<button class="btn btn-info">末页</button>
+		</div>
+		<button class="btn btn-info" @click="showSave" style="margin-top: 10px;">添加类型</button>
 	</div>
 </template>
 
@@ -96,7 +103,9 @@
 				fprice2: "",
 				sid2: "",
 				tid2: "",
-				host:"http://localhost/images/"
+				host: "http://localhost/images/",
+				currentPage: 0,
+				pageSize: 3
 			}
 		},
 		methods: {
@@ -119,7 +128,10 @@
 					})
 			},
 			getList() {
-				axios.get('http://localhost/food')
+				var param = new URLSearchParams()
+				param.append('currentPage', this.currentPage)
+				param.append('pageSize', this.pageSize)
+				axios.post('http://localhost/food/find', param)
 					.then(res => {
 						this.list = res.data;
 					})
@@ -208,10 +220,14 @@
 						this.tid2 = "";
 					})
 			},
+			next() {
+
+			},
+			before() {
+
+			}
 		}
 	}
 </script>
 
-<style>
-
-</style>
+<style></style>
