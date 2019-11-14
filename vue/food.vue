@@ -13,7 +13,7 @@
 				</select>
 				</br>
 				菜品描述：<input type="text" v-model="finfo" /><br /> 单价：
-				<input type="text" v-model="fprice" /><br /> 图片： <input type="file" multiple="multiple" id="photo" ref="photo"/><br />
+				<input type="text" v-model="fprice" /><br /> 图片： <input type="file" multiple="multiple" id="photo" ref="photo" /><br />
 				<button class="btn btn-success" @click="save">添加</button>
 			</form>
 		</div>
@@ -31,7 +31,7 @@
 				</select>
 				</br>
 				菜品描述：<input type="text" v-model="finfo2" /><br /> 单价：
-				<input type="text" v-model="fprice2" /><br /> 图片： <input type="file" multiple="multiple" id="photo2" ref="photo2"/><br />
+				<input type="text" v-model="fprice2" /><br /> 图片： <input type="file" multiple="multiple" id="photo2" ref="photo2" /><br />
 				<button class="btn btn-success" @click="update">修改</button>
 			</form>
 		</div>
@@ -65,12 +65,15 @@
 				</tr>
 			</tbody>
 		</table>
-		<div style="margin-top: 30px;">
-			<button class="btn btn-info">首页</button>
-			<button class="btn btn-info" @click="before">上一页</button>
-			<span>/</span>
-			<button class="btn btn-info" @click="next">下一页</button>
-			<button class="btn btn-info">末页</button>
+		<!-- 分页 -->
+		<div class="col-md-10 col-md-offset-1 text-center" id="page">
+			<ul class="pagination">
+				<li><a @click="first">首页</a></li>
+				<li><a @click="prev">上一页</a></li>
+				<li><a><span>{{currentPage}}</span>/<span>{{pageCount}}</span></a></li>
+				<li><a @click="next">下一页</a></li>
+				<li><a @click="last">尾页</a></li>
+			</ul>
 		</div>
 		<button class="btn btn-info" @click="showSave" style="margin-top: 10px;">添加类型</button>
 	</div>
@@ -79,6 +82,9 @@
 <script>
 	import axios from 'axios';
 	export default {
+		created() {
+			this.findcount(); //获得所有行数	
+		},
 		mounted() {
 			this.getList();
 			this.getType();
@@ -104,8 +110,10 @@
 				sid2: "",
 				tid2: "",
 				host: "http://localhost/images/",
-				currentPage: 0,
-				pageSize: 3
+				currentPage:1, //当前页
+				pageSize:3, //每页行数
+				count: "", //总行数
+				pageCount:"",//总页数
 			}
 		},
 		methods: {
@@ -129,16 +137,57 @@
 			},
 			getList() {
 				var param = new URLSearchParams()
-				param.append('currentPage', this.currentPage)
-				param.append('pageSize', this.pageSize)
+				param.append('offset', this.currentPage)
+				param.append('limit', this.pageSize)
 				axios.post('http://localhost/food/find', param)
 					.then(res => {
 						this.list = res.data;
+						this.getPageCount(); //获得所有页数	
 					})
 					.catch(err => {
 						console.error('获取数据失败' + err);
 					})
 
+			},
+			last() {
+				this.currentPage = this.pageCount;
+				this.getList();
+			},
+			next() {
+				if(this.currentPage < this.pageCount) {
+					this.currentPage += 1;
+					this.getList();
+				} else {
+					this.currentPage = this.pageCount;
+					layer.msg('已经是最后一页');
+				}
+
+			},
+			prev() {
+				if(this.currentPage > 1) {
+					this.currentPage -= 1;
+					this.getList();
+				} else {
+					this.currentPage = 1;
+					layer.msg('已经是第一页');
+				}
+
+			},
+			first() {
+				this.currentPage = 1;
+				this.getList();
+			},
+			findcount() {
+				axios.post('http://localhost/food/count')
+					.then(res => {
+						this.count = res.data;
+					})
+					.catch(err => {
+						console.error('获取数据失败' + err);
+					});
+			},
+			getPageCount() {
+				this.pageCount = Math.ceil(this.count / this.pageSize); //向上取整
 			},
 			del(id) {
 				axios.post(`http://localhost/food/${id}`)
@@ -179,8 +228,8 @@
 						this.fprice = "";
 						this.sid = "";
 						this.tid = "";
-						this.$refs.photo.value=''; //清空文件
-						
+						this.$refs.photo.value = ''; //清空文件
+
 					})
 			},
 			ShowUpdate(item) {
@@ -220,15 +269,9 @@
 						this.fprice2 = "";
 						this.sid2 = "";
 						this.tid2 = "";
-						this.$refs.photo2.value=''; //清空文件
+						this.$refs.photo2.value = ''; //清空文件
 					})
 			},
-			next() {
-
-			},
-			before() {
-
-			}
 		}
 	}
 </script>
