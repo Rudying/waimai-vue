@@ -10,7 +10,7 @@
 						<a href="#" @click="regist"  style="text-decoration:none">免费注册</a>
 					</span>
 					<span>&nbsp&nbsp|&nbsp&nbsp</span>
-					<a href="#" style="text-decoration:none">个人中心</a>
+					<a href="#" style="text-decoration:none" @click="myindex">个人中心</a>
 					<span>&nbsp&nbsp|&nbsp&nbsp</span>
 					<a target="_blank" href="#"  style="text-decoration:none">商户服务</a>
 					<span>&nbsp&nbsp|&nbsp&nbsp</span>
@@ -48,6 +48,9 @@
 			},
 			regist(){
 				this.$router.push("/regist")
+			},
+			myindex(){
+				this.$router.push("/myindex")
 			},
 			logout(){
 				axios.post("/users/logout",{
