@@ -13,7 +13,7 @@
 				</select>
 				</br>
 				菜品描述：<input type="text" v-model="finfo" /><br /> 单价：
-				<input type="text" v-model="fprice" /><br /> 图片： <input type="file" multiple="multiple" id="photo" /><br />
+				<input type="text" v-model="fprice" /><br /> 图片： <input type="file" multiple="multiple" id="photo" ref="photo"/><br />
 				<button class="btn btn-success" @click="save">添加</button>
 			</form>
 		</div>
@@ -31,7 +31,7 @@
 				</select>
 				</br>
 				菜品描述：<input type="text" v-model="finfo2" /><br /> 单价：
-				<input type="text" v-model="fprice2" /><br /> 图片： <input type="file" multiple="multiple" id="photo2" /><br />
+				<input type="text" v-model="fprice2" /><br /> 图片： <input type="file" multiple="multiple" id="photo2" ref="photo2"/><br />
 				<button class="btn btn-success" @click="update">修改</button>
 			</form>
 		</div>
@@ -167,6 +167,8 @@
 						this.fprice = "";
 						this.sid = "";
 						this.tid = "";
+						this.$refs.photo.value=''; //清空文件
+						
 					})
 			},
 			ShowUpdate(item) {
@@ -206,6 +208,7 @@
 						this.fprice2 = "";
 						this.sid2 = "";
 						this.tid2 = "";
+						this.$refs.photo2.value=''; //清空文件
 					})
 			},
 		}
