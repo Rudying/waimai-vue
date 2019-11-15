@@ -12,7 +12,7 @@
 		<div id="middle">
 			<div id="middle_1">
 				<div id="m">
-					<router-link to="/mymsg1/1">我的信息</router-link>
+					<router-link to="/mymsg1/6">我的信息</router-link>
 				</div>
 				
 				<div id="m">
@@ -24,7 +24,7 @@
 				</div>
 				
 				<div id="m">
-					<router-link to="/myaddress">我的地址</router-link>
+					<router-link to="/address">我的地址</router-link>
 				</div>
 				
 				<div id="m">
@@ -32,12 +32,13 @@
 				</div>
 				
 				<div id="m">
-					<router-link to="/password/1">修改密码</router-link>
+					<router-link to="/password/6">修改密码</router-link>
 				</div>
 			</div>
 			<div id="middle_2">
 				<router-view name="mymsg1"></router-view>
 				<router-view name="password"></router-view>
+				<router-view name="address"></router-view>
 			</div>
 		</div>
 		<div id="buttom">
@@ -47,6 +48,21 @@
 </template>
 
 <script>
+	import axios from 'axios';
+	export default {
+		created() {
+			axios.get("http://localhost/users/findOne/" + this.uid).then((response) => {
+				this.list = response.data;
+				// layer.msg(this.uid)
+			})
+		},
+		data() {
+			return {
+				uid: this.$route.params.id,
+				list: []
+			}
+		},
+	}
 </script>
 
 <style scoped="scoped">

@@ -15,9 +15,11 @@ import login from '../vue/login.vue';
 import regist from '../vue/regist.vue';
 // 个人中心
 import myindex from '../vue/myindex.vue';
+//这玩意暂时没发现啥作用.目前先别删下面这行
 import top1 from '../vue/top1.vue';
 import mymsg1 from '../vue/mymsg1.vue';
 import password from '../vue/password.vue';
+import address from '../vue/address.vue'
 /* admin后台 */
 import admin from '../vue/admin.vue';
 import food from '../vue/food.vue';
@@ -42,31 +44,6 @@ var router = new VueRouter({
 				"regist": regist
 			}
 		},
-		// ===================================================
-		{
-			path: "/myindex",
-			components: {
-				"myindex": myindex
-			},
-			children: [
-			{
-				path: "/mymsg1/:id",components: {
-					"mymsg1": mymsg1,
-					"myindex": myindex
-				}
-			}, 
-			{
-				path: "/password/:id",components: {
-				"password": password,
-				"myindex": myindex,
-				}
-			},
-			
-			
-			],
-		},
-
-		// ==================================================== 
 		{
 			path: "/admin",
 			components: {
@@ -98,13 +75,43 @@ var router = new VueRouter({
 				"top": top,
 				"middle": middle,
 				"bottom": bottom,
-
 			},
-			children: [{
+			// ===========================================================
+			children: [
+				{
+					path: "/myindex",
+					components: {
+						"myindex": myindex
+					},
+					children: [
+					{
+						path: "/mymsg1/:id",components: {
+							"mymsg1": mymsg1,
+							"myindex": myindex
+						}
+					}, 
+					{
+						path: "/password/:id",components: {
+						"password": password,
+						"myindex": myindex,
+						}
+					},
+					{
+						path: "/address",components: {
+						"address": address,
+						"myindex": myindex,
+						}
+					},
+					
+			// ===========================================================
+					],
+				},
+				
+				{
 				path: "/*",
 				components: {
 					"ml": ml,
-					"mr": mr
+					"mr": mr,
 				},
 				children: [{
 						path: "/shop",
@@ -117,7 +124,8 @@ var router = new VueRouter({
 						components: {
 							"right-bottom": foodtype,
 						},
-					}
+					},
+					
 				]
 			}, ]
 		}

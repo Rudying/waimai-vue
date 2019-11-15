@@ -38,6 +38,9 @@
 <script>
 	import axios from 'axios';
 	export default {
+		created() {
+			layer.msg("123")
+		},
 		data() {
 			return {
 				password: '',
