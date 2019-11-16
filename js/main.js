@@ -14,7 +14,7 @@ import $ from 'jquery';
  Vue.use(Vuex);
 
 
- axios.defaults.baseURL = "http://localhost:9000";
+ axios.defaults.baseURL = "http://localhost";
  axios.defaults.withCredentials = true;
 
  var app = new Vue({

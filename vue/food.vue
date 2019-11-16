@@ -189,15 +189,22 @@
 			getPageCount() {
 				this.pageCount = Math.ceil(this.count / this.pageSize); //向上取整
 			},
+			
 			del(id) {
-				axios.post(`http://localhost/food/${id}`)
+				var self=this;
+				layer.confirm('确定要删除吗？', {
+					btn: ['确定', '取消'], //按钮
+				}, function(index) {
+ 				  axios.post(`http://localhost/food/${id}`)
 					.then(res => {
+						layer.close(index);
 						layer.msg("删除成功");
-						this.getList();
+						self.getList();
 					})
 					.catch(err => {
 						console.error(err);
 					})
+				});
 			},
 			showSave() {
 				this.layerRef = layer.open({
