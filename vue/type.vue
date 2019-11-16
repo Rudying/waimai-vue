@@ -125,7 +125,7 @@
 			},
 			getList() {
 				
-				var param = new URLSearchParams()
+				var param = new URLSearchParams();
 				param.append('offset', this.currentPage);
 				param.append('limit', this.pageSize);
 				
