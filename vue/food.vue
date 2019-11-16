@@ -147,7 +147,6 @@
 					.catch(err => {
 						console.error('获取数据失败' + err);
 					})
-
 			},
 			last() {
 				this.currentPage = this.pageCount;
@@ -161,7 +160,6 @@
 					this.currentPage = this.pageCount;
 					layer.msg('已经是最后一页');
 				}
-
 			},
 			prev() {
 				if(this.currentPage > 1) {
@@ -171,7 +169,6 @@
 					this.currentPage = 1;
 					layer.msg('已经是第一页');
 				}
-
 			},
 			first() {
 				this.currentPage = 1;
@@ -236,7 +233,6 @@
 						this.sid = "";
 						this.tid = "";
 						this.$refs.photo.value = ''; //清空文件
-
 					})
 			},
 			ShowUpdate(item) {

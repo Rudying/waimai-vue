@@ -2,7 +2,7 @@
 	<div id="middle">
 		<router-view name="ml"></router-view>
 		<router-view name="mr"></router-view>
-
+		<router-view name="myindex"></router-view>
 	</div>
 	
 </template>
