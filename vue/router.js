@@ -23,9 +23,17 @@ import address from '../vue/address.vue'
 /* admin后台 */
 import admin from '../vue/admin.vue';
 import food from '../vue/food.vue';
-import advice from '../vue/advice.vue';
+import advice from '../vue/userAdvice.vue';
 import type from '../vue/type.vue';
-
+import permission from '../vue/permission.vue';
+import role from '../vue/role.vue';
+import user from '../vue/users.vue';
+import ua from '../vue/userAddress.vue';
+import uc from '../vue/userCollection.vue';
+import uco from '../vue/userComment.vue';
+import uo from '../vue/userOrders.vue';
+import oe from '../vue/orderElement.vue';
+import store from '../vue/store.vue';
 
 var router = new VueRouter({
 	routes: [{
@@ -44,6 +52,7 @@ var router = new VueRouter({
 				"regist": regist
 			}
 		},
+
 		{
 			path: "/admin",
 			components: {
@@ -66,7 +75,61 @@ var router = new VueRouter({
 					components: {
 						"show": food,
 					}
-				}
+				},
+				{
+					path: "/permission",
+					components: {
+						"show": permission,
+					}
+				},
+				{
+					path: "/role",
+					components: {
+						"show": role,
+					}
+				},
+				{
+					path: "/user",
+					components: {
+						"show": user,
+					}
+				},
+				{
+					path: "/address",
+					components: {
+						"show": ua,
+					}
+				},
+				{
+					path: "/collection",
+					components: {
+						"show": uc,
+					}
+				},
+				{
+					path: "/comment",
+					components: {
+						"show": uco,
+					}
+				},
+				{
+					path: "/element",
+					components: {
+						"show": oe,
+					}
+				},
+				{
+					path: "/order",
+					components: {
+						"show": uo,
+					}
+				},
+				{
+					path: "/store",
+					components: {
+						"show": store,
+					}
+				},
 			]
 		},
 		{
