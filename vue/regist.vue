@@ -48,7 +48,7 @@
 				phone:null,
 				yzm:null,
 				aaa:10,
-				btnText:'发送验证码',
+				btnText:'免费获取验证码',
 				
 
 				emailRS: null,
