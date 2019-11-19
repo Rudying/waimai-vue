@@ -252,12 +252,10 @@
 
 <style scoped="scoped">
 	.register {
-		height: 500px;
 		width: 1000px;
-		margin: auto;
-		margin-top: 120px;
+		margin-left: 300px;
+		margin-top: 50px;
 		float: left;
-		margin: 150px;
 	}
 
 	.top_1 {

@@ -31,7 +31,7 @@
 
 </script>
 
-<style>
+<style scoped="scoped">
 	#span{
 		padding-bottom: 30px;
 	}
