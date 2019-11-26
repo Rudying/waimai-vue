@@ -212,7 +212,7 @@
 	}
 </script>
 
-<style>
+<style scoped="scoped">
 	img {
 		height: 80px;
 		width: 100px;
