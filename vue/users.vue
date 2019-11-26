@@ -47,6 +47,7 @@
 				axios.get('http://localhost/users')
 					.then(res => {
 						this.list = res.data;
+						console.log(this.list[0].username);
 					})
 					.catch(err => {
 						console.error('获取数据失败' + err);
@@ -68,7 +69,7 @@
 						})
 				});
 			},
-			forbid() {
+			forbid(id) {
 
 			}
 		}

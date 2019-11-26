@@ -2,7 +2,7 @@
 	<div class="container" id="middle-right">
 		<div id="right-top">
 			<carousel class="index-carousel" :autoplay="true" :minSwipeDistance="40" :scrollPerPage="true" :speed="500" :perPage="1"
-			 :paginationPadding="10" :paginationSize="10" :loop="true" @param="right">
+			 :paginationPadding="10" :paginationSize="10" :loop="true" @param="mr">
 				<slide>
 					<img src="../images/lb1.png" class="img-responsive" />
 				</slide>

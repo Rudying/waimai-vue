@@ -75,7 +75,7 @@
 				<li><a @click="last">尾页</a></li>
 			</ul>
 		</div>
-		<button class="btn btn-info" @click="showSave" style="margin-top: 10px;">添加类型</button>
+		<button class="btn btn-info" @click="showSave" style="margin-top: 10px;">添加菜品</button>
 	</div>
 </template>
 

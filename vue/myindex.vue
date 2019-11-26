@@ -1,13 +1,9 @@
 <template>
 	<div class="container" id="box">
 		<div id="top">
-			<div id="top_1">t1</div>
-			<div id="top_2">
 				<h3 align="center" style="color: #3498DB;">
 					个人中心
 				</h3>
-			</div>
-			<div id="top_3">t3</div>
 		</div>
 		<div id="middle">
 			<div id="middle_1">
@@ -41,9 +37,9 @@
 				<router-view name="address"></router-view>
 			</div>
 		</div>
-		<div id="buttom">
+		<!--<div id="buttom">
 			buttom
-		</div>
+		</div>-->
 	</div>
 </template>
 
@@ -66,30 +62,18 @@
 </script>
 
 <style scoped="scoped">
-	#box{
+	/*#box{
 		border: #000000 solid 0.0625rem;
-	}
+	}*/
 	#top{
 		border: #000000 solid 0.0625rem;
 		height: 100px;
 		width: auto;
 	}
-	#top_1{
-		border: #000000 solid 0.0625rem;
-		height: 100%;
-		width: 20%;
-		float: left;
-	}
 	#top_2{
 		border: #000000 solid 0.0625rem;
 		height: 100%;
-		width: 60%;
-		float: left;
-	}
-	#top_3{
-		border: #000000 solid 0.0625rem;
-		height: 100%;
-		width: 20%;
+		width: 100%;
 		float: left;
 	}
 	#middle{
@@ -115,8 +99,8 @@
 		width: 80%;
 		float: left;
 	}
-	#buttom{
+	/*#buttom{
 		border: #000000 solid 0.0625rem;
 		height: 80px;
-	}
+	}*/
 </style>
