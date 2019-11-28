@@ -34,6 +34,15 @@ import uco from '../vue/userComment.vue';
 import uo from '../vue/userOrders.vue';
 import oe from '../vue/orderElement.vue';
 import store from '../vue/store.vue';
+/*商户服务*/
+import shanghu from '../vue/shanghu.vue';
+import shanghuregister from '../vue/shanghu-register.vue';
+import shanghufood from '../vue/shanghu-food.vue';
+import shanghutype from '../vue/shanghu-type.vue';
+import shanghucomment from '../vue/shanghu-comment.vue';
+import shanghuadvice from '../vue/shanghu-advice.vue';
+
+import shopCar from './shopCar.vue';
 
 var router = new VueRouter({
 	routes: [{
@@ -140,57 +149,103 @@ var router = new VueRouter({
 				"bottom": bottom,
 			},
 			// ===========================================================
-			children: [
-				{
+			children: [{
 					path: "/myindex",
 					components: {
 						"myindex": myindex
 					},
-					children: [
-					{
-						path: "/mymsg1/:id",components: {
-							"mymsg1": mymsg1,
-							"myindex": myindex
-						}
-					}, 
-					{
-						path: "/password/:id",components: {
-						"password": password,
-						"myindex": myindex,
-						}
-					},
-					{
-						path: "/address",components: {
-						"address": address,
-						"myindex": myindex,
-						}
-					},
-					
-			// ===========================================================
+					children: [{
+							path: "/mymsg1/:id",
+							components: {
+								"mymsg1": mymsg1,
+								"myindex": myindex
+							}
+						},
+						{
+							path: "/password/:id",
+							components: {
+								"password": password,
+								"myindex": myindex,
+							}
+						},
+						{
+							path: "/address",
+							components: {
+								"address": address,
+								"myindex": myindex,
+							}
+						},
+
 					],
 				},
-				
+				//============商户服务==============
 				{
-				path: "/*",
-				components: {
-					"ml": ml,
-					"mr": mr,
+					path: "/shanghu",
+					components: {
+						"shanghu": shanghu
+					},
+					children: [{
+							path: "/shanghu-register",
+							components: {
+								"shanghu-show": shanghuregister,
+							}
+						},
+						{
+							path: "/shanghu-food",
+							components: {
+								"shanghu-show": shanghufood,
+							}
+						},
+						{
+							path: "/shanghu-type",
+							components: {
+								"shanghu-show": shanghutype,
+							}
+						},
+						{
+							path: "/shanghu-comment",
+							components: {
+								"shanghu-show": shanghucomment,
+							}
+						},
+						{
+							path: "/shanghu-advice",
+							components: {
+								"shanghu-show": shanghuadvice,
+							}
+						},
+					],
 				},
-				children: [{
-						path: "/shop",
-						components: {
-							"right-bottom": shop,
-						},
+
+				{
+					path: "/shopCar",
+					components: {
+						"shopCar": shopCar,
+					}
+				},
+
+				{
+					path: "/*",
+					components: {
+						"ml": ml,
+						"mr": mr,
 					},
-					{
-						path: "/foodtype",
-						components: {
-							"right-bottom": foodtype,
+					children: [{
+							path: "/shop",
+							components: {
+								"right-bottom": shop,
+							},
 						},
-					},
-					
-				]
-			}, ]
+						{
+							path: "/foodtype",
+							components: {
+								"right-bottom": foodtype,
+							},
+						},
+
+					]
+				},
+			]
 		}
 	]
 })

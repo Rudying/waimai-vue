@@ -6,7 +6,7 @@
 					<span>
 						
 						<a href="#"  @click="login" v-if="loginName==''" style="text-decoration:none" >您好，请登录&nbsp&nbsp 丨</a>
-						<span href="#" v-else="loginName">欢迎 {{loginName}} 登录 丨 <a href="#" @click="logout" style="text-decoration:none">安全退出</a> 丨</span>
+						<span href="#" v-else="loginName" >欢迎 {{loginName}} 登录&nbsp&nbsp丨&nbsp&nbsp<a href="#" @click="shopCar" style="text-decoration:none">购物车</a>&nbsp&nbsp丨&nbsp&nbsp<a href="#" @click="logout" style="text-decoration:none">安全退出</a> 丨</span>
 						<a href="#" @click="regist"  style="text-decoration:none">免费注册</a>
 					</span>
 					<span>&nbsp&nbsp|&nbsp&nbsp</span>
@@ -40,6 +40,9 @@
 			}
 		},
 		methods:{
+			shopCar(){
+				this.$router.push("/shopCar")
+			},
 			shouye(){
 				this.$router.push("/")
 			},
@@ -50,7 +53,12 @@
 				this.$router.push("/regist")
 			},
 			myindex(){
-				this.$router.push("/myindex")
+				if(store.state.loginName!=""){
+					this.$router.push("/mymsg1")
+				}else{
+					layer.msg('当前未登录，无法进入');
+				}
+				
 			},
 			logout(){
 				axios.post("/users/logout",{
@@ -58,6 +66,7 @@
 				}).then((response)=>{
 					layer.msg('已退出当前账号');
 					this.loginName = "";
+					store.commit("getLoginName","");
 					this.$router.push("/");
 				})
 			}
@@ -73,6 +82,11 @@
 				}
 			})
 		},
+		beforeUpdate() {
+			if(this.loginName!=""){
+				store.commit("getLoginName",this.loginName)
+			}
+		}
 	};
 	
 </script>

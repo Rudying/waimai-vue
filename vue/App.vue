@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<router-view name="top"></router-view>
-		<router-view name="myindex"></router-view>
 		<router-view name="middle"></router-view>
 				<br>
 		<router-view name="bottom"></router-view>

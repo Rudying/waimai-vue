@@ -7,6 +7,8 @@ import $ from 'jquery';
  import axios from 'axios';
 
  import router from '../vue/router.js'
+ import store from './store.js'
+ window.store=store
  import App from '../vue/App.vue';
  import VueCarousel from 'vue-carousel';
  Vue.use(VueCarousel);
@@ -14,7 +16,7 @@ import $ from 'jquery';
  Vue.use(Vuex);
 
 
- axios.defaults.baseURL = "http://192.168.9.102/";
+ axios.defaults.baseURL = "http://localhost/";
  axios.defaults.withCredentials = true;
 
  var app = new Vue({
