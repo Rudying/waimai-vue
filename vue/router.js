@@ -43,6 +43,8 @@ import shanghucomment from '../vue/shanghu-comment.vue';
 import shanghuadvice from '../vue/shanghu-advice.vue';
 
 import shopCar from './shopCar.vue';
+import paysuccess from './paysuccess.vue';
+
 
 var router = new VueRouter({
 	routes: [{
@@ -225,6 +227,13 @@ var router = new VueRouter({
 				},
 
 				{
+					path: "/paysuccess",
+					components: {
+						"success": paysuccess,
+					}
+				},
+
+				{
 					path: "/*",
 					components: {
 						"ml": ml,
@@ -242,7 +251,6 @@ var router = new VueRouter({
 								"right-bottom": foodtype,
 							},
 						},
-
 					]
 				},
 			]

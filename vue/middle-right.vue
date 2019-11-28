@@ -15,10 +15,8 @@
 			</carousel>
 		</div>
 		<div id="right-bottom">
-			<router-view name="right-bottom">
-			</router-view>
-		
-		</div>
+			<router-view name="right-bottom"></router-view>		
+		</div>	
 	</div>
 </template>
 

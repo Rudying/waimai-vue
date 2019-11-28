@@ -2,101 +2,58 @@
 	<div id="shop">
 		<div class="m-result" style="float: left;">
 			<ul id="showgoods">
-				<li class="goods">
+				<li class="goods" v-for="item in list">
 					<div class="goodswrap promotion">
 						<a href="#">
 							<div class="img">
-								<img class="imgtag" src="images/xx.jpg">
+								<img :src="host+item.fphoto">
 							</div>
 						</a>
 						<div class="desc clearfix">
-							<p class="price"> <span class="cur"><i>¥</i>99</span> </p>
+							<p class="price"> <span class="cur"><i>¥</i>{{item.fprice}}</span> </p>
 							<div class="titlewrap">
 								<a class="title" href="#">
-									<h3>杜记 黄焖鸡米饭 量大 肉多 欢迎回头客</h3>
+									<h4>{{item.fname}}</h4>
+									<h4>{{item.finfo}}</h4>
 								</a>
 							</div>
 							<a href="#" class="addcart" title="gid">
-		
 								<button class="btn btn-danger glyphicon glyphicon-shopping-cart" style="font-size: 18px;">加入购物车</button>
-		
 							</a>
 						</div>
 					</div>
 				</li>
-				<li class="goods">
-					<div class="goodswrap promotion">
-						<a href="#">
-							<div class="img">
-								<img class="imgtag" src="images/xx.jpg">
-							</div>
-						</a>
-						<div class="desc clearfix">
-							<p class="price"> <span class="cur"><i>¥</i>99</span> </p>
-							<div class="titlewrap">
-								<a class="title" href="#">
-									<h3>杜记 黄焖鸡米饭 量大 肉多 欢迎回头客</h3>
-								</a>
-							</div>
-							<a href="#" class="addcart" title="gid">
-						
-								<button class="btn btn-danger glyphicon glyphicon-shopping-cart" style="font-size: 18px;">加入购物车</button>
-						
-							</a>
-						</div>
-					</div>
-				</li>
-				<li class="goods">
-					<div class="goodswrap promotion">
-						<a href="#">
-							<div class="img">
-								<img class="imgtag" src="images/xx.jpg">
-							</div>
-						</a>
-						<div class="desc clearfix">
-							<p class="price"> <span class="cur"><i>¥</i>99</span> </p>
-							<div class="titlewrap">
-								<a class="title" href="#">
-									<h3>杜记 黄焖鸡米饭 量大 肉多 欢迎回头客</h3>
-								</a>
-							</div>
-							<a href="#" class="addcart" title="gid">
-						
-								<button class="btn btn-danger glyphicon glyphicon-shopping-cart" style="font-size: 18px;">加入购物车</button>
-						
-							</a>
-						</div>
-					</div>
-				</li>
-				<li class="goods">
-					<div class="goodswrap promotion">
-						<a href="#">
-							<div class="img">
-								<img class="imgtag" src="images/xx.jpg">
-							</div>
-						</a>
-						<div class="desc clearfix">
-							<p class="price"> <span class="cur"><i>¥</i>99</span> </p>
-							<div class="titlewrap">
-								<a class="title" href="#">
-									<h3>杜记 黄焖鸡米饭 量大 肉多 欢迎回头客</h3>
-								</a>
-							</div>
-							<a href="#" class="addcart" title="gid">
-						
-								<button class="btn btn-danger glyphicon glyphicon-shopping-cart" style="font-size: 18px;">加入购物车</button>
-						
-							</a>
-						</div>
-					</div>
-				</li>
-		        
 			</ul>
 		</div>
 	</div>
 </template>
 
 <script>
+	import axios from 'axios';
+	export default {
+		created() {
+           this.getList();
+		},
+		data() {
+			return {
+				list: [],
+				tid:this.$route.query.id,
+				host: "http://localhost/images/",
+			}
+		},
+		methods: {
+			getList() {
+				axios.post('http://localhost/food/findByTid/'+this.tid)
+					.then(res => {
+						this.list = res.data;
+						
+					})
+					.catch(err => {
+						console.error('获取数据失败' + err);
+					})
+			}
+		}
+	}
 </script>
 
 <style scoped="scoped">
@@ -106,17 +63,20 @@
 		background-color: azure;
 		text-align: center;
 		border-radius: 5px;
-		float: left;		
+		float: left;
 	}
 	
-	ul{list-style:none;}
-
-	.m-result{
+	ul {
+		list-style: none;
+	}
+	
+	.m-result {
 		width: 1200px;
 		margin-bottom: 6px;
 		margin-left: -37px;
 		margin-top: 10px;
 	}
+	
 	.m-result .goods {
 		position: relative;
 		float: left;
@@ -145,16 +105,17 @@
 		color: #333
 	}
 	
-	.m-result .img img {	   
-		transition: transform 0.5s; 
+	.m-result .img img {
+		transition: transform 0.5s;
 		display: block;
 		width: 260px;
 		height: 257px;
 		padding: 12px 12px 10px
 	}
-	.m-result .img img:hover{	
+	
+	.m-result .img img:hover {
 		transform: scale(1.1);
-	} 
+	}
 	
 	.m-result .goods .desc {
 		width: 234px;
@@ -199,6 +160,7 @@
 		min-height: 40px;
 		height: auto
 	}
+	
 	.m-result .goods:hover {
 		z-index: 99;
 		*zoom: 1
@@ -212,7 +174,4 @@
 	.m-result .addcart:hover {
 		color: #e31436
 	}
-	
-	
-	
 </style>

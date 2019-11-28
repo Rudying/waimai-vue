@@ -64,7 +64,7 @@
 						<td>{{item.street}}</td>
 						<td>{{item.uinfo}}</td>
 						<button class="btn btn-success" @click="showUpdate(item)">修改</button>
-						<td><input type="radio" class="radio" :value="item.uaid" v-model="uaid" @click="point"/></td>
+						<td><input type="radio" class="radio" :value="item.uinfo" v-model="uinfo"/></td>
 					</tr>
 				</tbody>
 				<tr>
@@ -141,7 +141,9 @@
 				tel2: null,
 				carElement:null,
 				price:null,
-				omessage:null
+				omessage:null,
+				uinfo:null
+				
 			}
 		},
 		methods: {
@@ -256,11 +258,15 @@
 					})
 			},
 			pay(){
-				
+				var param = new URLSearchParams();
+				param.append('uid', this.uid);
+				param.append('oaddress', this.uinfo);
+				param.append('omessage', this.omessage);
+				axios.post('http://localhost/orders/save',param)
+				.then(res=>{
+					this.$router.push('/paysuccess');
+				})
 			},
-			point(){
-				alert(this.uaid);
-			}
 		}
 	}
 </script>

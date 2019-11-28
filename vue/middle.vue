@@ -5,6 +5,7 @@
 		<router-view name="myindex"></router-view>
 		<router-view name="shanghu"></router-view>
 		<router-view name="shopCar"></router-view>
+		<router-view name="success"></router-view>
 	</div>
 	
 </template>
