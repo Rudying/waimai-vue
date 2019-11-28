@@ -12,9 +12,7 @@
 					<span>&nbsp&nbsp|&nbsp&nbsp</span>
 					<a href="#" style="text-decoration:none" @click="myindex">个人中心</a>
 					<span>&nbsp&nbsp|&nbsp&nbsp</span>
-					<a target="_blank" href="#"  style="text-decoration:none">商户服务</a>
-					<span>&nbsp&nbsp|&nbsp&nbsp</span>
-					<a target="_blank" href="#"  style="text-decoration:none">帮助中心</a>
+					<a href="#"  style="text-decoration:none" @click="shanghu">商户服务</a>
 				</div>
 			</div>
 		</div>
@@ -59,6 +57,9 @@
 					layer.msg('当前未登录，无法进入');
 				}
 				
+			},
+			shanghu(){
+				this.$router.push("/shanghu")
 			},
 			logout(){
 				axios.post("/users/logout",{

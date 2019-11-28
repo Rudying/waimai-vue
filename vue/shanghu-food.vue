@@ -223,6 +223,7 @@
 				});
 			},
 			save() {
+				var self = this;
 				var formData = new FormData() // 声明一个FormData对象
 				var formData = new window.FormData() // vue 中使用 window.FormData(),否则会报 'FormData isn't definded'
 				formData.append("tid", this.tid);
@@ -237,7 +238,7 @@
 				axios.post('http://localhost/food', formData)
 					.then(res => {
 						layer.close(this.layerRef);
-//						this.getUid();
+						self.getList();
 						this.getList();
 						this.fname = "";
 						this.finfo = "";
@@ -261,6 +262,7 @@
 				});
 			},
 			update() {
+				var self = this;
 				var formData = new FormData() // 声明一个FormData对象
 				var formData = new window.FormData() // vue 中使用 window.FormData(),否则会报 'FormData isn't definded'
 				formData.append("fid", this.fid);
@@ -276,7 +278,8 @@
 				axios.post('http://localhost/food/update', formData)
 					.then(res => {
 						layer.close(this.layerRef);
-						this.getUid();
+						layer.msg("更新成功");
+						self.getList();
 						this.fid = "";
 						this.fname2 = "";
 						this.finfo2 = "";
